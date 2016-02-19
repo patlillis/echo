@@ -1,0 +1,160 @@
+ECHO
+
+- http://www.santafe.edu/media/workingpapers/93-04-023.pdf
+
+
+r = # of resources types in the world
+
+
+Agents
+	- Genome
+		- has r + 7 genese
+		- Tags (3)
+			- phenotype
+			- visible to other agents
+			- Offense Tag
+			- Defense Tag
+			- Mating Tag
+		- Conditions (3)
+			- internal behavior
+			- Combat Condition
+			- Trade Condition
+			- Mating Condition
+		- Uptake Mask (1)
+			- r genese
+			- determines agents ability to collect each resource type directly from the environment
+		- Trading Resource (1)
+			- resource type that the agent will provide to another agent if trading takes place
+	- Resource Reservoir
+		- Used to pay taxes, produce offspring, and trade
+	- Replication
+		- Occurs when agent acquires sufficient resources
+		- Agent's genome is copied using resources in resoirver
+		- Self-Reproduction Threshold
+			- used to determine when enough resources have been collected
+			- E.g. genome has 3 a's, self-repro thresh. is 2, needs 6 before repro.
+		- Self-Reproduction Fraction
+			- determines the division of excess resources between original agent and child
+			- setting of 1.0 will result in offspring with no internal reserve
+			- setting of 0.0 allocates all extra resources to offspring
+		- Self-Reproduction Threshold and Self-Reproduction Fraction are defined as constants for the entire world
+		- Mutation Probability
+			- If mutation occurs in trading-resource gene:
+				- agent's trading resource is set to a randomly selected resource
+			- If mutation occurs in uptake mask:
+				- bits are flipped independently, each according to thsis probability
+			- If mutation occurs in tag or coditions:
+				- r = # of resource type, n = length of chromosome
+				- a number is uniformly selected from [1...n+1].
+				- if this number lies in [1...n-1], corresponding allele is set to randomly chosen value (resource type).
+				- if this number is n+1, a symbol is added to the end of the chromosome and assigned a random value
+				- if this number is n, a number is uniformly selected from [1...r+1]
+				- if second number is r+1, last symbol is deleted from the chromosome.
+				- otherwise, the last symbol in the gene is set to the corresponding resource
+
+
+Interactions
+	- Between pairs of agents (located at the same site)
+		- tested in order (combat, trading, mating)
+		- Combat
+			- one agent is killed, and its resources are placed in reservoir of survivor
+			- Agent A will attack B if A's combat condition is a prefix of B's offense tag
+			- Not fully described (see)
+		- Trading
+			- Must be by mutual agreement
+			- Only if A's trading condition is a prefix for B's offense tag
+			- Only if B's trading condition is a prefix for A's offense tag
+			- Fraction of A's trade resource (above what is needed for mating) is given to B, and vice versa
+			- Could be 0, this is a form of "bluffing". Agents which are easily bluffed die sooner
+		- Mating
+			- Exchange genetic info through recombination
+			- match if :
+				- A's mating condition is a nonzero prefix of B's mating tag, or
+				- both A's mating condition and B's mating tag are zero length
+			- 2-point gene crossover
+				- 1) select 2 genes to contain crossover points
+				- 2) choose crossover points in each gene in each agent
+				- 3) cross over in the manner of 2-point crossover
+	- Between agents and the environment
+
+
+
+Echo Cycle
+	- "game loop"
+	- 1) Interactions between agents occur at each site
+		- "Interaction Parameter" - Proportion of agents that interact at each time step
+		- One agent is selected randomly
+		- Second agent is then selected in the vicinity of the first
+		- First agent moves adjacent to the second in the 1-D array of agents at the site
+		- If first agent attacks the second, the second can run away in the array
+	- 2) Agents collect resources from the site if any are available
+		- Controlled by site parameters
+		- distributed as equally as possible among the agents at the site that are able to collect them
+	- 3) Each agent at each site is taxed (probabilistically)
+		- world-wide probablility
+		- If agent does not posess the resources for the tax, it is killed, and its resources are returned to the environment
+	- 4) Agents are randomly killed
+		- resources returned to the environment
+	- 5) Sites produce resources
+	- 6) Agents that do not acquire resources migrate to a neighboring site
+		- "Acquired" through picking them up, combat, or trade
+		- neighboring site is selected at random
+	- 7) Agents that can replicate do (asexual reproduction)
+
+
+Number of resources 		4
+Trading Fraction 			0.5
+Interaction fraction 		0.02
+Self-replication fraction 	0.5
+Self-replication threshold 	2
+Taxation probability 		0.1
+
+Mutation rate 				0.02
+Crossover probability 		0.07
+Random death 				0.0001
+Initial vector 				10 	10 	10 	10
+Production vector 			10 	10 	10 	10
+Maximum vector 				100 100 100 100
+Maintenance vector 			1 	1 	1 	1
+
+
+
+Appendix: Echo Parameters
+The parameters are described below:
+• The number of resource types that will exist in the world.
+• The interaction fraction determines the number of agent-agent interactions that
+will occur at a site in each Echo cycle. This is determined by multiplying the
+interaction fraction by the population at a site. Use of a constant fraction to
+determine interaction rates regardless of population size does not accommodate
+density-dependent effects, which is an unfortunate oversimplification.
+• The trading fraction determines what proportion of an agent’s excess trading
+resource it will exchange in a trading interaction with another agent. Trade is
+described in Section 2.3.
+• The taxation probability is the probability that an agent is taxed in an Echo cycle
+(see Section 2.4 for details).
+• The neighborhood determines the possible directions of migration between sites.
+The three possibilities, given a rectangular array of sites, are none (i.e., no
+migration), the four compass points (used in the results described in this article), or
+the compass points plus the diagonals.
+There are three parameters for each Echo site:
+• The mutation probability determines the probability that the genome of an agent is
+mutated during self-reproduction. This is a per-gene probability. Mutation is
+handled slightly differently for different genes (see Section 2.2).
+Artificial Life Volume 3, Number 3 187
+P. T. Hraber, T. Jones, and S. Forrest The Ecology of Echo
+• The crossover probability is used similarly to a genetic algorithm. It determines the
+probability that two agents that mate will be subject to crossover. If crossover is
+not performed, the agents are unchanged.
+• At the end of an Echo cycle, there is a (typically small) probability of each agent
+being killed. This is called the random death probability.
+In addition to these parameters, every site must specify four resource-level vectors.
+Each of these consists of a vector of non-negative integers whose length is the same as
+the number of resource types in the world. These vectors are used as follows:
+• The production vector contains the number of resources of each resource type that
+will be produced by the site in each Echo cycle.
+• The initial vector contains the number of resources of each resource type that will
+be present at the site when it is first created.
+• The maximum vector contains the maximum level of each resource type that can
+accumulate at the site.
+• The maintenance vector contains the number of each resource type that will be
+charged to an agent when it is taxed.

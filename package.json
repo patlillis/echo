@@ -1,0 +1,32 @@
+{
+  "name": "echo",
+  "version": "1.0.0",
+  "description": "Evolutionary ecosystem art project",
+  "author": "Pat Lillis",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "*",
+    "babel-preset-es2015": "*",
+    "babelify": "*",
+    "browser-sync": "*",
+    "browserify": "*",
+    "gulp": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-changed": "*",
+    "gulp-cssnano": "*",
+    "gulp-file-include": "*",
+    "gulp-htmlmin": "*",
+    "gulp-if": "*",
+    "gulp-imagemin": "*",
+    "gulp-plumber": "*",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "*",
+    "gulp-uglify": "*",
+    "lodash.assign": "*",
+    "node-notifier": "*",
+    "vinyl-buffer": "*",
+    "vinyl-source-stream": "*",
+    "watchify": "*",
+    "yargs": "*"
+  }
+}
