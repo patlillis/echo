@@ -8,7 +8,7 @@ r = # of resources types in the world
 
 Agents
 	- Genome
-		- has r + 7 genese
+		- has r + 7 genes
 		- Tags (3)
 			- phenotype
 			- visible to other agents

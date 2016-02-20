@@ -8,8 +8,6 @@ export default class World {
 			numActors: options.numActors || 1
 		}
 
-
-
 		this.canvas		= options.canvas || document.querySelector('canvas')
 		this.ctx		= this.canvas.getContext('2d')
 		this.resources 	= new Array(this.options.numResources)
@@ -21,8 +19,11 @@ export default class World {
 	    this.width = window.innerWidth;
 	    this.height = window.innerHeight;
 
-		this.ctx.mozImageSmoothingEnabled = false;
-		this.ctx.imageSmoothingEnabled = false;
+	    this.canvas.width = this.width;
+	    this.canvas.height = this.height;
+
+		// this.ctx.mozImageSmoothingEnabled = false;
+		// this.ctx.imageSmoothingEnabled = false;
 
 	}
 
