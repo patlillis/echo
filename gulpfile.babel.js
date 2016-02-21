@@ -62,7 +62,7 @@ gulp.task('sass', buildSass);
 // JS
 
 const browserifyArgs = {
-  entries: 'src/js/main.js',
+  entries: 'src/js/Main.js',
   debug: true,
   transform: [ 'babelify' ]
 }

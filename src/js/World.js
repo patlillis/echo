@@ -1,4 +1,4 @@
-import Actor from './Actor.js'
+import Actor from './Actor.js';
 
 export default class World {
 	constructor(options = {}) {
@@ -6,14 +6,14 @@ export default class World {
 		this.options = {
 			numResources: options.numResources || 3,
 			numActors: options.numActors || 1
-		}
+		};
 
-		this.canvas		= options.canvas || document.querySelector('canvas')
-		this.ctx		= this.canvas.getContext('2d')
-		this.resources 	= new Array(this.options.numResources)
+		this.canvas		= options.canvas || document.querySelector('canvas');
+		this.ctx		= this.canvas.getContext('2d');
+		this.resources 	= new Array(this.options.numResources);
 		this.actors  	= Array.apply(null, Array(this.options.numActors)).map(() => new Actor({ ctx: this.ctx }));
 
-		this._running 	= false
+		this._running 	= false;
 
 
 	    this.width = window.innerWidth;

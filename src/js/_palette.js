@@ -4,6 +4,6 @@ const palette = {
 	green: 	'#c7f464',
 	pink: 	'#ff6b6b',
 	red: 	'#c44d58'
-}
+};
 
-export default palette  
+export default palette;
