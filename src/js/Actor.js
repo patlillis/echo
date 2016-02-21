@@ -1,13 +1,5 @@
-import palette from './_palette.js';
 import * as Shapes from './_shapes.js';
-import {
-  Point,
-  Point3D,
-  Vector,
-  Size,
-  RGBA,
-  Alpha,
-  Particle } from './_objects.js';
+import { Point, Size } from './_objects.js';
 
   export default class Actor {
     constructor(options = {}) {
