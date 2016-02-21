@@ -36,13 +36,17 @@ import {
       uptake: this.uptake
     };
 
-    this.position = options.position || new Point(100, 100);
-    this.size = options.size || new Size(1, 100);
-    this.shape = new Shapes.Circle({
+    this.position = options.position || new Point(500, 100);
+
+    this.size = options.size || new Size(100, 50);
+    
+    this.shape = new Shapes.Rectangle({
       ctx: this.ctx,
       position: this.position,
       size: this.size
     });
+
+
   }
 
   draw() {

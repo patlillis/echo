@@ -11,7 +11,9 @@ export default class World {
 		this.canvas		= options.canvas || document.querySelector('canvas');
 		this.ctx		= this.canvas.getContext('2d');
 		this.resources 	= new Array(this.options.numResources);
-		this.actors  	= Array.apply(null, Array(this.options.numActors)).map(() => new Actor({ ctx: this.ctx }));
+		this.actors  	= [];
+		for (let i = 0; i < this.options.numActors; i++)
+			this.actors.push(new Actor({ ctx: this.ctx }));
 
 		this._running 	= false;
 
@@ -21,9 +23,6 @@ export default class World {
 
 	    this.canvas.width = this.width;
 	    this.canvas.height = this.height;
-
-		// this.ctx.mozImageSmoothingEnabled = false;
-		// this.ctx.imageSmoothingEnabled = false;
 
 	}
 
