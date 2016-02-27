@@ -1,5 +1,6 @@
 import Actor from './Actor.js';
 import { average } from './_math.js';
+import { TWEEN } from 'tween.js';
 
 export default class World {
 	constructor(options = {}) {
@@ -47,21 +48,22 @@ export default class World {
 	//Single loop frame
 	loop(time) {
 		this.frameNumber++;
-		// console.log(`Frame #${this.frameNumber}`);
 
-		//Draw stuff
-		this.draw();
-
-		//Simluate stuff
 		if (!this.previousLoopTimestamp)
 			this.previousLoopTimestamp = time;
 
-		this.millisecondsUntilStep -= (time - this.previousLoopTimestamp);
+		//Get time since last loop
+		const delta = time - this.previousLoopTimestamp;
 
+		//Draw stuff
+		this.draw(delta);
+
+		//Simluate stuff
+		//Run simulation appropriate number of times
+		this.millisecondsUntilStep -= delta;
 		while (this.millisecondsUntilStep <= 0) {
 			this.simulationStep();
 			this.millisecondsUntilStep += this.millisecondsPerStep;
-			// console.log(`	Step #${this.stepNumber}`);
 		}
 
 		this.previousLoopTimestamp = time;
@@ -73,13 +75,13 @@ export default class World {
 
 
 	//Draw (once per frame)
-	draw() {
+	draw(delta) {
 		for (let a of this.actors)
 			a.draw();
 	}
 
 
-	//Step simluation (could be multiple per frame)
+	//Step simluation (could be multiple per frame, or one every few frames)
 	simulationStep() {
 		this.stepNumber++;
 	}

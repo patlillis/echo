@@ -1,6 +1,9 @@
 ECHO
 
-- http://www.santafe.edu/media/workingpapers/93-04-023.pdf
+https://www.cs.unm.edu/~forrest/publications/echo-97.pdf
+http://tuvalu.santafe.edu/projects/echo/
+http://ccl.northwestern.edu/netlogo/5.3.0/
+http://www.santafe.edu/media/workingpapers/93-04-023.pdf
 
 
 r = # of resources types in the world
@@ -100,6 +103,12 @@ Echo Cycle
 		- "Acquired" through picking them up, combat, or trade
 		- neighboring site is selected at random
 	- 7) Agents that can replicate do (asexual reproduction)
+
+
+For a given timestep:
+	- (A) Calculate Changes
+	- (B) Animate Changes
+	- (C) Enact Changes
 
 
 Number of resources 		4

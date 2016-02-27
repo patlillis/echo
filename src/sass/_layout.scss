@@ -1,17 +1,19 @@
 html, body {
 	height: 100%;
 	width: 100%;
+	overflow: hidden;
+	position: relative;
 }
 
-.container {
-  width: 100% - 2 * $site-gutter;
-  max-width: $site-width;
-  margin-right: auto;
-  margin-left: auto;
-}
+// .container {
+//   width: 100% - 2 * $site-gutter;
+//   max-width: $site-width;
+//   margin-right: auto;
+//   margin-left: auto;
+// }
 
 #canvas {
-	height: 100%;
-	width: 100%;
-	background-color: #ddd;
+	position: absolute;
+	left: 50%;
+	top: 50%;
 }

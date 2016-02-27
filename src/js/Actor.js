@@ -32,7 +32,7 @@ import { Point, Size } from './_objects.js';
 
     this.size = options.size || new Size(100, 50);
     
-    this.shape = new Shapes.Rectangle({
+    this.shape = new Shapes.Triangle({
       ctx: this.ctx,
       position: this.position,
       size: this.size
